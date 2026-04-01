@@ -32,7 +32,7 @@ volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
-        "torch>=2.1",
+        "torch==2.6.0",
         "transformers>=4.44",
         "sae-lens>=4.0",
         "h5py",
