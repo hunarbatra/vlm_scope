@@ -70,6 +70,8 @@ TARGET_L0 = 50.0         # Target sparsity (matching TopK k=50)
 BANDWIDTH = 0.001         # STE bandwidth for threshold gradients
 SPARSITY_COEFF = 1.0     # Sparsity penalty coefficient
 LR = 7e-5                # Learning rate (from JumpReLU paper)
+LR_WARMUP_STEPS = 1000   # LR warmup period
+SPARSITY_WARMUP_STEPS = 2000  # Ramp up sparsity penalty over this many steps
 
 # Checkpoint percentages for intermediate saves (pretrained only)
 CHECKPOINT_PCTS = {25: 12, 50: 25, 75: 37}
@@ -160,6 +162,14 @@ def train_worker(worker_id: int, layer_indices: list):
 
             # Optimizer: Adam with betas=(0.0, 0.999) as in JumpReLU paper
             optimizer = torch.optim.Adam(sae.parameters(), lr=LR, betas=(0.0, 0.999), eps=1e-8)
+
+            # LR warmup scheduler
+            def lr_lambda(step):
+                if step < LR_WARMUP_STEPS:
+                    return step / max(LR_WARMUP_STEPS, 1)
+                return 1.0
+            scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
+
             if optim_path.exists():
                 try:
                     optimizer.load_state_dict(
@@ -232,12 +242,15 @@ def train_worker(worker_id: int, layer_indices: list):
 
                     local_tokens += nv
 
+                    # Sparsity warmup: ramp up over first SPARSITY_WARMUP_STEPS
+                    sparsity_scale = min(1.0, batch_idx / max(SPARSITY_WARMUP_STEPS, 1))
+
                     # Compute JumpReLU loss
                     loss, recon_loss, l0, fvu = sae.compute_loss(
                         valid_acts,
                         bandwidth=BANDWIDTH,
                         target_l0=TARGET_L0,
-                        sparsity_coeff=SPARSITY_COEFF,
+                        sparsity_coeff=SPARSITY_COEFF * sparsity_scale,
                     )
 
                     loss.backward()
@@ -249,6 +262,7 @@ def train_worker(worker_id: int, layer_indices: list):
                     torch.nn.utils.clip_grad_norm_(sae.parameters(), 1.0)
 
                     optimizer.step()
+                    scheduler.step()
                     optimizer.zero_grad(set_to_none=True)
 
                     # Normalize decoder weights to unit norm
