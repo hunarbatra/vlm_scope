@@ -88,7 +88,10 @@ def _upload_run(api, repo_id, run_name, run_dir, methods, hf_prefix):
     timeout=86400,
 )
 def upload_checkpoints():
-    """Upload all SAE checkpoints (TopK + JumpReLU) to HuggingFace."""
+    """Upload JumpReLU pretrained SAE checkpoints to HuggingFace.
+
+    TopK checkpoints (pretrained + random) are already uploaded separately.
+    """
     from pathlib import Path
     from huggingface_hub import HfApi, create_repo
 
@@ -98,13 +101,7 @@ def upload_checkpoints():
     # Create repo if needed
     create_repo(repo_id, repo_type="model", exist_ok=True, token=HF_TOKEN)
 
-    # Upload TopK SAE run
-    topk_dir = Path(RESULTS_BASE) / "run"
-    if topk_dir.exists():
-        _upload_run(api, repo_id, "TopK", str(topk_dir),
-                    methods=["pretrained", "random"], hf_prefix="topk")
-
-    # Upload JumpReLU SAE run
+    # Upload JumpReLU SAE run (pretrained only)
     jumprelu_dir = Path(RESULTS_BASE) / "run_jumprelu"
     if jumprelu_dir.exists():
         _upload_run(api, repo_id, "JumpReLU", str(jumprelu_dir),
