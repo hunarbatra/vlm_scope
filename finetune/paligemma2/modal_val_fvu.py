@@ -24,7 +24,7 @@ volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
-        "torch>=2.1",
+        "torch==2.6.0",
         "transformers>=4.44",
         "sae-lens>=4.0",
         "h5py",
@@ -54,8 +54,13 @@ N_TRAINING_SAMPLES = 50_000
 N_VAL_SAMPLES = 5_000
 CHUNK_SIZE = 1_000
 RESULTS_BASE = "/vol/results/paligemma2"
-METHODS = ["pretrained", "random"]
 N_GPUS = 8
+
+# SAE architecture: "topk" or "jumprelu"
+SAE_TYPE = "jumprelu"
+
+# Methods depend on SAE type (JumpReLU only trained pretrained)
+METHODS = ["pretrained"] if SAE_TYPE == "jumprelu" else ["pretrained", "random"]
 
 
 @app.function(
@@ -76,11 +81,12 @@ def fvu_worker(worker_id: int, layer_indices: list):
     from tqdm import tqdm
 
     sys.path.insert(0, "/root/paligemma2")
-    from utils import initialize_sae
+    from utils import initialize_sae, initialize_jumprelu_sae
 
-    out_dir = Path(RESULTS_BASE) / "analysis" / "val_fvu"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"val_fvu{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
+    ckpt_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "checkpoints"
     act_dir = Path(RESULTS_BASE) / "run" / "activations"
 
     # Validation chunks: samples 50000-55000
@@ -104,8 +110,12 @@ def fvu_worker(worker_id: int, layer_indices: list):
                 print(f"[FVU W{worker_id}] SKIP {method} L{layer_idx} — no checkpoint")
                 continue
 
-            sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
-                                 device="cuda", cache_dir="/vol/cache/huggingface")
+            if SAE_TYPE == "jumprelu":
+                sae = initialize_jumprelu_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                              device="cuda", cache_dir="/vol/cache/huggingface")
+            else:
+                sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                     device="cuda", cache_dir="/vol/cache/huggingface")
             sae.eval()
 
             # Accumulators for online variance computation
@@ -192,7 +202,10 @@ def fvu_worker(worker_id: int, layer_indices: list):
 
                         # Reconstruct through SAE
                         with torch.no_grad():
-                            recon = sae(act_t.unsqueeze(0)).squeeze(0)  # (seq, d_in)
+                            if SAE_TYPE == "jumprelu":
+                                recon = sae(act_t)  # (seq, d_in)
+                            else:
+                                recon = sae(act_t.unsqueeze(0)).squeeze(0)  # (seq, d_in)
 
                         err = (recon - act_t).cpu().numpy().astype(np.float64)
                         act_cpu = act_np.astype(np.float64)
@@ -266,7 +279,8 @@ def merge_fvu_results():
     import pandas as pd
     from pathlib import Path
 
-    fvu_dir = Path(RESULTS_BASE) / "analysis" / "val_fvu"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    fvu_dir = Path(RESULTS_BASE) / "analysis" / f"val_fvu{sae_suffix}"
 
     all_results = []
     for f_path in sorted(fvu_dir.glob("fvu_worker_*.json")):
