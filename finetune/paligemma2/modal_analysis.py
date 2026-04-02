@@ -28,7 +28,7 @@ volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
-        "torch>=2.1",
+        "torch==2.6.0",
         "transformers>=4.44",
         "sae-lens>=4.0",
         "nnsight>=0.3",
@@ -65,8 +65,13 @@ N_VAL_SAMPLES = 5_000
 CHUNK_SIZE = 1_000
 RESULTS_BASE = "/vol/results/paligemma2"
 MODEL_NAME = "google/paligemma2-3b-pt-224"
-METHODS = ["pretrained", "random"]
 N_GPUS = 8
+
+# SAE architecture: "topk" or "jumprelu"
+SAE_TYPE = "jumprelu"
+
+# Methods depend on SAE type (JumpReLU only trained pretrained)
+METHODS = ["pretrained"] if SAE_TYPE == "jumprelu" else ["pretrained", "random"]
 
 # Spatial keywords for filtering VQA questions
 SPATIAL_KEYWORDS = [
@@ -110,7 +115,8 @@ def generate_fvu_table():
     import csv
     from pathlib import Path
 
-    log_dir = Path(RESULTS_BASE) / "run" / "logs"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    log_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "logs"
     out_dir = Path(RESULTS_BASE) / "analysis"
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -190,11 +196,12 @@ def cosine_worker(worker_id: int, layer_indices: list):
     from tqdm import tqdm
 
     sys.path.insert(0, "/root/paligemma2")
-    from utils import initialize_sae, _download_gemma_scope_params, _load_gemma_scope_weights
+    from utils import initialize_sae, initialize_jumprelu_sae, _download_gemma_scope_params, _load_gemma_scope_weights
 
-    out_dir = Path(RESULTS_BASE) / "analysis" / "cosines"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"cosines{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
+    ckpt_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "checkpoints"
 
     print(f"[Cosine W{worker_id}] Layers: {layer_indices}")
 
@@ -247,11 +254,12 @@ def energy_worker(worker_id: int, layer_indices: list):
     from tqdm import tqdm
 
     sys.path.insert(0, "/root/paligemma2")
-    from utils import initialize_sae
+    from utils import initialize_sae, initialize_jumprelu_sae
 
-    out_dir = Path(RESULTS_BASE) / "analysis" / "energy"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"energy{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
+    ckpt_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "checkpoints"
     act_dir = Path(RESULTS_BASE) / "run" / "activations"
 
     # Use validation chunks (50k-55k) for energy computation
@@ -271,8 +279,12 @@ def energy_worker(worker_id: int, layer_indices: list):
             print(f"[Energy W{worker_id}] SKIP L{layer_idx} — no checkpoint")
             continue
 
-        sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
-                             device="cuda", cache_dir="/vol/cache/huggingface")
+        if SAE_TYPE == "jumprelu":
+            sae = initialize_jumprelu_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                          device="cuda", cache_dir="/vol/cache/huggingface")
+        else:
+            sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                 device="cuda", cache_dir="/vol/cache/huggingface")
         sae.eval()
 
         # Accumulate squared feature activations for image and text tokens separately
@@ -299,7 +311,10 @@ def energy_worker(worker_id: int, layer_indices: list):
 
                     # Encode through SAE
                     with torch.no_grad():
-                        feature_acts = sae.encode(act.unsqueeze(0).float()).squeeze(0)  # (seq, d_sae)
+                        if SAE_TYPE == "jumprelu":
+                            feature_acts = sae.encode(act.float())  # (seq, d_sae)
+                        else:
+                            feature_acts = sae.encode(act.unsqueeze(0).float()).squeeze(0)  # (seq, d_sae)
 
                     fa_cpu = feature_acts.cpu().numpy().astype(np.float64)
 
@@ -359,10 +374,11 @@ def select_adapted_features():
     from pathlib import Path
     from tqdm import tqdm
 
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
     analysis_dir = Path(RESULTS_BASE) / "analysis"
-    cos_dir = analysis_dir / "cosines"
-    ev_dir = analysis_dir / "energy"
-    out_dir = analysis_dir / "adapted"
+    cos_dir = analysis_dir / f"cosines{sae_suffix}"
+    ev_dir = analysis_dir / f"energy{sae_suffix}"
+    out_dir = analysis_dir / f"adapted{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Concatenate all layers
@@ -478,11 +494,12 @@ def firing_worker(worker_id: int, layer_indices: list):
     from datasets import load_dataset
 
     sys.path.insert(0, "/root/paligemma2")
-    from utils import initialize_sae
+    from utils import initialize_sae, initialize_jumprelu_sae
 
-    out_dir = Path(RESULTS_BASE) / "analysis" / "firing"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"firing{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
+    ckpt_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "checkpoints"
     act_dir = Path(RESULTS_BASE) / "run" / "activations"
 
     # Identify spatial samples by filtering VQA questions
@@ -513,8 +530,12 @@ def firing_worker(worker_id: int, layer_indices: list):
             print(f"[Firing W{worker_id}] SKIP L{layer_idx}")
             continue
 
-        sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
-                             device="cuda", cache_dir="/vol/cache/huggingface")
+        if SAE_TYPE == "jumprelu":
+            sae = initialize_jumprelu_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                          device="cuda", cache_dir="/vol/cache/huggingface")
+        else:
+            sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                 device="cuda", cache_dir="/vol/cache/huggingface")
         sae.eval()
 
         # Per-feature counts
@@ -542,7 +563,10 @@ def firing_worker(worker_id: int, layer_indices: list):
                     img_e = int(ds.attrs.get("img_end", 0))
 
                     with torch.no_grad():
-                        codes = sae.encode(act.unsqueeze(0)).squeeze(0)  # (seq, d_sae)
+                        if SAE_TYPE == "jumprelu":
+                            codes = sae.encode(act.float())  # (seq, d_sae)
+                        else:
+                            codes = sae.encode(act.unsqueeze(0)).squeeze(0)  # (seq, d_sae)
 
                     # Feature fired if any token has nonzero activation
                     fired = (codes != 0).any(dim=0).cpu().numpy()  # (d_sae,)
@@ -606,8 +630,9 @@ def find_spatial_features():
     from scipy.stats import fisher_exact
     from statsmodels.stats.multitest import multipletests
 
-    firing_dir = Path(RESULTS_BASE) / "analysis" / "firing"
-    out_dir = Path(RESULTS_BASE) / "analysis" / "spatial"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    firing_dir = Path(RESULTS_BASE) / "analysis" / f"firing{sae_suffix}"
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"spatial{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     all_results = []
@@ -735,12 +760,13 @@ def lexical_worker(worker_id: int, feature_assignments: list):
     sys.path.insert(0, "/root/paligemma2")
     from utils import (
         initialize_vlm_model, process_vlm_inputs,
-        get_image_token_positions, initialize_sae,
+        get_image_token_positions, initialize_sae, initialize_jumprelu_sae,
     )
 
-    out_dir = Path(RESULTS_BASE) / "analysis" / "lexical"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    out_dir = Path(RESULTS_BASE) / "analysis" / f"lexical{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
+    ckpt_dir = Path(RESULTS_BASE) / (f"run{sae_suffix}") / "checkpoints"
 
     print(f"[Lexical W{worker_id}] {len(feature_assignments)} features to test")
 
@@ -772,12 +798,16 @@ def lexical_worker(worker_id: int, feature_assignments: list):
 
         # Load SAE for this layer
         ckpt_path = ckpt_dir / f"pretrained_layer_{layer_idx}.pt"
-        sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
-                             device="cuda", cache_dir="/vol/cache/huggingface")
+        if SAE_TYPE == "jumprelu":
+            sae = initialize_jumprelu_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                          device="cuda", cache_dir="/vol/cache/huggingface")
+        else:
+            sae = initialize_sae(layer_idx, checkpoint_path=str(ckpt_path),
+                                 device="cuda", cache_dir="/vol/cache/huggingface")
         sae.eval()
 
         # Load firing data to find top samples per feature
-        firing_path = Path(RESULTS_BASE) / "analysis" / "firing" / f"firing_layer_{layer_idx}.json"
+        firing_path = Path(RESULTS_BASE) / "analysis" / f"firing{sae_suffix}" / f"firing_layer_{layer_idx}.json"
         if firing_path.exists():
             with open(firing_path) as f:
                 firing_data = json.load(f)
@@ -823,7 +853,10 @@ def lexical_worker(worker_id: int, feature_assignments: list):
 
                         # Encode through SAE
                         with torch.no_grad():
-                            codes = sae.encode(act_tensor.unsqueeze(0).to("cuda")).squeeze(0).cpu()
+                            if SAE_TYPE == "jumprelu":
+                                codes = sae.encode(act_tensor.to("cuda")).cpu()
+                            else:
+                                codes = sae.encode(act_tensor.unsqueeze(0).to("cuda")).squeeze(0).cpu()
 
                         # Check feature activation on image tokens
                         if img_end > img_start:
@@ -884,12 +917,13 @@ def compute_intersection():
     from pathlib import Path
     from tqdm import tqdm
 
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
     analysis_dir = Path(RESULTS_BASE) / "analysis"
-    out_dir = analysis_dir / "final_features"
+    out_dir = analysis_dir / f"final_features{sae_suffix}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Load adapted features
-    adapted_path = analysis_dir / "adapted" / "adapted_features_results.csv"
+    adapted_path = analysis_dir / f"adapted{sae_suffix}" / "adapted_features_results.csv"
     adapted_by_layer = {}
     if adapted_path.exists():
         with open(adapted_path) as f:
@@ -901,7 +935,7 @@ def compute_intersection():
     print(f"[Intersection] Adapted: {sum(len(v) for v in adapted_by_layer.values())} features")
 
     # Load spatial features
-    spatial_path = analysis_dir / "spatial" / "spatial_features.csv"
+    spatial_path = analysis_dir / f"spatial{sae_suffix}" / "spatial_features.csv"
     spatial_by_layer = {}
     if spatial_path.exists():
         df = pd.read_csv(spatial_path)
@@ -910,7 +944,7 @@ def compute_intersection():
     print(f"[Intersection] Spatial: {sum(len(v) for v in spatial_by_layer.values())} features")
 
     # Load lexical filtering results (merge all worker outputs)
-    lexical_dir = analysis_dir / "lexical"
+    lexical_dir = analysis_dir / f"lexical{sae_suffix}"
     lexical_passed = {}
     if lexical_dir.exists():
         for f_path in sorted(lexical_dir.glob("lexical_results_w*.json")):
@@ -1110,7 +1144,8 @@ def get_candidate_features():
     import pandas as pd
     from pathlib import Path
 
-    csv_path = Path(RESULTS_BASE) / "analysis" / "final_features" / "final_spatial_visual_features.csv"
+    sae_suffix = "_jumprelu" if SAE_TYPE == "jumprelu" else ""
+    csv_path = Path(RESULTS_BASE) / "analysis" / f"final_features{sae_suffix}" / "final_spatial_visual_features.csv"
     if not csv_path.exists():
         return []
 
