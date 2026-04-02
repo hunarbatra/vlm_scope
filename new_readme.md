@@ -2,7 +2,7 @@
 
 Pipeline for training and analyzing Sparse Autoencoders (SAEs) on Vision-Language Models to identify adapted, spatial, and visually-grounded features. Supports two VLM backends:
 
-- **PaliGemma2-3B** (new) — Gemma 2 backbone, Gemma Scope base SAEs
+- **PaliGemma2-3B** — Gemma 2 backbone, Gemma Scope base SAEs
 - **LLaVA-MORE** (original) — Llama 3.1 backbone, Llama Scope base SAEs
 
 ---
@@ -10,33 +10,48 @@ Pipeline for training and analyzing Sparse Autoencoders (SAEs) on Vision-Languag
 ## Repository Structure
 
 ```
-vlm_scope_backup/
-  vlm_scope/
-    finetune/
-      paligemma2/              # PaliGemma2-3B pipeline (Modal cloud)
-        utils.py               # Model loading, SAE init (TopK + JumpReLU)
-        modal_train.py         # Phase 1+2: cache activations + train TopK SAEs (8 GPU)
-        modal_train_jumprelu.py # Train JumpReLU SAEs from Gemma Scope init (8 GPU)
-        modal_analysis.py      # Full analysis pipeline Steps 1-8 (8 GPU)
-        modal_val_fvu.py       # Validation FVU with Full/Image/Text breakdown (8 GPU)
-        modal_upload_hf.py     # Upload checkpoints to HuggingFace
-        cache_activations.py   # Standalone activation caching script
-        train_sae.py           # Standalone SAE training script
-        orchestrate.py         # Local orchestration helper
-      vqa/                     # LLaVA-MORE VQA fine-tuning (original)
-      instruct/                # Instruction tuning experiments
-      experiments/             # Experimental scripts
+vlm_scope/
+  finetune/
+    paligemma2/              # PaliGemma2-3B pipeline
+      utils.py               # Model loading, SAE init (TopK + JumpReLU)
+      modal_train.py         # Modal: cache activations + train TopK SAEs (8 GPU)
+      modal_train_jumprelu.py # Modal: train JumpReLU SAEs (8 GPU)
+      modal_analysis.py      # Modal: full analysis pipeline Steps 1-8 (8 GPU)
+      modal_val_fvu.py       # Modal: validation FVU with Full/Image/Text breakdown
+      modal_upload_hf.py     # Modal: upload checkpoints to HuggingFace
+      cache_activations.py   # Standalone: activation caching (local/any cluster)
+      train_sae.py           # Standalone: SAE training (local/any cluster)
+      orchestrate.py         # Standalone: local orchestration helper
+    vqa/                     # LLaVA-MORE VQA fine-tuning (original)
+    instruct/                # Instruction tuning experiments
+    experiments/             # Experimental scripts
+```
 
-vision-language-scope/         # Original LLaVA-MORE analysis codebase
-  features/
-    adapted/                   # Adapted feature metrics (Ev, cosine, selection)
-    spatial/                   # Spatial feature identification (firing, Fisher test)
-    hallucination/             # Hallucination feature analysis
-    ocr/                       # OCR feature analysis
-  ablation/                    # Feature ablation experiments
-  experiments/                 # Attribution patching
-  utils/                       # Shared utilities (SAE loading, data loading)
-  finetune/vqa/                # LLaVA-MORE SAE training
+---
+
+## Setup
+
+### Environment
+
+```bash
+pip install torch>=2.1 transformers>=4.44 sae-lens>=4.0 nnsight>=0.3 \
+    h5py tqdm huggingface-hub Pillow numpy scipy statsmodels pandas accelerate datasets
+```
+
+### Configuration
+
+Copy `.env.template` to `.env` and fill in your tokens:
+```bash
+cp .env.template .env
+# Edit .env with your HuggingFace token
+```
+
+### Modal Setup (optional, for cloud GPU training)
+
+```bash
+pip install modal
+modal setup  # or: modal token set
+export MODAL_PROFILE=your-profile  # if using named profiles
 ```
 
 ---
@@ -65,84 +80,146 @@ Two SAE architectures are supported:
 - k=50 (matching Llama Scope's architecture)
 - Note: Gemma Scope natively uses JumpReLU, so TopK init from Gemma Scope has architecture mismatch
 
-**JumpReLU SAE** (custom, matching Gemma Scope)
+**JumpReLU SAE** (custom, matching Gemma Scope) — **recommended**
 - Activation: `x * (x > threshold)` with learnable per-feature threshold
 - Uses Straight-Through Estimator (STE) gradients via rectangle function
-- Sparsity: targets L0 ≈ 50 via penalty `coeff * ((L0/target) - 1)^2`
+- Sparsity: targets L0 ~ 50 via penalty `coeff * ((L0/target) - 1)^2`
 - Properly loads Gemma Scope weights **including threshold parameter**
 - No architecture mismatch — recommended for Gemma Scope initialization
 
-### Prerequisites
+### Step 1: Cache Activations
+
+Activations must be cached before training. This runs the VLM forward pass through NNsight hooks and saves per-layer residual stream activations to H5 files.
+
+#### Option A: Modal (cloud GPUs)
+
+Activation caching is included as Phase 1 of `modal_train.py`. It automatically runs before training.
 
 ```bash
-pip install modal
-modal setup  # or: modal token set
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_train.py
 ```
 
-Configure Modal profile if needed:
+Phase 1 caches 55,000 samples (50k train + 5k val) across all 26 layers into H5 files.
+
+#### Option B: Standalone (local or any cluster)
+
+For running on a local GPU or non-Modal cluster:
+
 ```bash
-export MODAL_PROFILE=your-profile
+cd finetune/paligemma2
+
+# Cache activations for all layers
+python cache_activations.py \
+  --model_name google/paligemma2-3b-pt-224 \
+  --output_dir /path/to/activations \
+  --n_samples 55000 \
+  --chunk_size 1000 \
+  --from_layer 0 \
+  --to_layer 26 \
+  --device cuda
 ```
 
-### Step 1: Train SAEs
+This produces 55 H5 files in the output directory (`chunk_0_1000.h5`, `chunk_1000_2000.h5`, ...).
 
-All training runs on Modal cloud GPUs. Activations are cached first (Phase 1), then SAEs are trained (Phase 2). Both phases use 8 GPUs in parallel via `starmap`.
+#### Option C: Orchestrator (local multi-step)
+
+The orchestrator runs caching + training as a single pipeline:
+
+```bash
+cd finetune/paligemma2
+
+python orchestrate.py \
+  --output_dir /path/to/results \
+  --n_samples 55000 \
+  --device cuda
+```
+
+### Step 2: Train SAEs
+
+#### Option A: Modal (8-GPU parallel)
 
 **TopK SAE Training:**
 ```bash
-cd vlm_scope/finetune/paligemma2
-MODAL_PROFILE=hunar-oxford modal run modal_train.py
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_train.py
 ```
 
 **JumpReLU SAE Training** (recommended for Gemma Scope init):
 ```bash
-cd vlm_scope/finetune/paligemma2
-MODAL_PROFILE=hunar-oxford modal run modal_train_jumprelu.py
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_train_jumprelu.py
 ```
 
-Training configuration (both):
-- Dataset: 50,000 VQAv2 training + 5,000 validation samples
-- Chunk size: 1,000 samples
-- All 26 layers
-- Methods: `pretrained` (Gemma Scope init) + `random`
-- Training batch size: 8
-- Intermediate checkpoints at 25%, 50%, 75%
+Both scripts distribute 26 layers across 8 GPUs via `modal.starmap`.
 
-TopK-specific: k=50, LR = 2e-4 / sqrt(d_sae/16384)
-JumpReLU-specific: target_l0=50, bandwidth=0.001, LR=7e-5, Adam betas=(0.0, 0.999)
+#### Option B: Standalone (local or any cluster)
 
-**Output on Modal Volume** (`vlm-scope-data-v2`):
+```bash
+cd finetune/paligemma2
+
+# Train TopK SAE for a specific layer
+python train_sae.py \
+  --activations_dir /path/to/activations \
+  --output_dir /path/to/results \
+  --layer 0 \
+  --method pretrained \
+  --n_training_samples 50000 \
+  --chunk_size 1000 \
+  --device cuda
+
+# Train all layers sequentially
+for layer in $(seq 0 25); do
+  python train_sae.py \
+    --activations_dir /path/to/activations \
+    --output_dir /path/to/results \
+    --layer $layer \
+    --method pretrained \
+    --device cuda
+done
 ```
-/vol/results/paligemma2/
-  run/                          # TopK results
-    activations/                # 55 H5 files (~3.5 TB)
-    checkpoints/                # {method}_layer_{i}.pt
-    checkpoint_{25,50,75}pct/   # Intermediate checkpoints
-    logs/                       # metrics_{method}_layer_{i}.csv
-  run_jumprelu/                 # JumpReLU results
-    checkpoints/
-    checkpoint_{25,50,75}pct/
-    logs/
-```
 
-### Step 2: Compute Validation FVU
+For JumpReLU training without Modal, the training loop in `modal_train_jumprelu.py:train_worker()` can be adapted — the core logic uses `initialize_jumprelu_sae()` from `utils.py` and operates on cached H5 activations.
+
+#### Training Configuration
+
+| Parameter | TopK | JumpReLU |
+|-----------|------|----------|
+| k / target L0 | k=50 | target_l0=50 |
+| Learning rate | 2e-4 / sqrt(d_sae/16384) | 7e-5 |
+| Optimizer | Adam | Adam (betas=0.0, 0.999) |
+| Bandwidth | — | 0.001 |
+| Sparsity coeff | — | 1.0 |
+| Batch size | 8 | 8 |
+| Dataset | 50k VQAv2 train + 5k val | 50k VQAv2 train + 5k val |
+| Intermediate ckpts | 25%, 50%, 75% | 25%, 50%, 75% |
+
+### Step 3: Compute Validation FVU
 
 Computes FVU broken down by token type (Full / Image / Text) on held-out validation set, matching the paper's Table 1 format.
 
+Configure `SAE_TYPE` at the top of the script: `"topk"` or `"jumprelu"`.
+
+#### Modal
+
 ```bash
-MODAL_PROFILE=hunar-oxford modal run modal_val_fvu.py
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_val_fvu.py
 ```
 
-Uses 8 GPUs, each computing FVU for ~3-4 layers across both methods.
+Uses 8 GPUs, each computing FVU for ~3-4 layers.
 
-**Output:** `analysis/val_fvu/val_fvu_table.csv`, `val_fvu_summary.json`
+**Output:** `analysis/val_fvu_jumprelu/val_fvu_table.csv`, `val_fvu_summary.json`
 
-### Step 3: Run Analysis Pipeline
+### Step 4: Run Analysis Pipeline
 
 Computes adapted features, spatial features, lexical filtering, and intersection — all on Modal using cached activations.
 
+Configure `SAE_TYPE` at the top of `modal_analysis.py`: `"topk"` or `"jumprelu"`.
+
 ```bash
-MODAL_PROFILE=hunar-oxford modal run modal_analysis.py
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_analysis.py
 ```
 
 **Pipeline steps (automated):**
@@ -158,22 +235,49 @@ MODAL_PROFILE=hunar-oxford modal run modal_analysis.py
 | 7 | Lexical Filtering | 8 | Generic prompt test to remove text artifacts |
 | 8 | Intersection | 0 | Adapted ∩ Spatial ∩ Lexical-filtered |
 
-**Output:** `analysis/{cosines,energy,adapted,firing,spatial,lexical,final_features}/`
+**Output:** `analysis/{cosines,energy,adapted,firing,spatial,lexical,final_features}_jumprelu/`
 
-### Step 4: Upload to HuggingFace
+### Step 5: Upload to HuggingFace
 
 ```bash
-MODAL_PROFILE=hunar-oxford modal run modal_upload_hf.py
+cd finetune/paligemma2
+MODAL_PROFILE=your-profile modal run modal_upload_hf.py
 ```
 
 Uploads SAE checkpoints, intermediate checkpoints, and training logs to HF repo `hunarbatra/vlm_scope_paligemma2_sae`.
+
+### Regenerating H5 Activations
+
+If you move to a new cluster or need to regenerate the cached activations (e.g., after losing the Modal volume):
+
+**On Modal:**
+Run `modal_train.py` — Phase 1 automatically caches all activations before training begins. If checkpoints already exist, Phase 2 will resume from them.
+
+**On any cluster with GPU:**
+```bash
+cd finetune/paligemma2
+
+# Full regeneration: 55k samples, all 26 layers
+python cache_activations.py \
+  --model_name google/paligemma2-3b-pt-224 \
+  --output_dir /path/to/activations \
+  --n_samples 55000 \
+  --chunk_size 1000 \
+  --from_layer 0 \
+  --to_layer 26 \
+  --device cuda
+```
+
+Requirements: ~40GB GPU memory (bfloat16 PaliGemma2-3B + NNsight hooks). Output: ~3.5TB of H5 files.
+
+Once activations are cached, all analysis scripts (`modal_analysis.py` steps 2-8) and training scripts can operate on them without the VLM.
 
 ### Key Files
 
 **`utils.py`** — Core utilities:
 - `initialize_vlm_model()` — Load PaliGemma2-3B + processor
-- `process_vlm_inputs(image, prompt, processor, model)` → `(input_ids, attention_mask, pixel_values)`
-- `get_image_token_positions(input_ids)` → `(start, end)` of image token span
+- `process_vlm_inputs(image, prompt, processor, model)` -> `(input_ids, attention_mask, pixel_values)`
+- `get_image_token_positions(input_ids)` -> `(start, end)` of image token span
 - `initialize_sae(layer_idx, ...)` — TopK SAE (sae-lens)
 - `initialize_jumprelu_sae(layer_idx, ...)` — JumpReLU SAE (custom)
 - `JumpReLUSAE` — JumpReLU autoencoder class with STE training support
@@ -322,13 +426,13 @@ Volume: `vlm-scope-data-v2`
     checkpoints/
     checkpoint_{25,50,75}pct/
     logs/
-  analysis/                     # Analysis outputs
-    val_fvu/                    # Validation FVU tables
-    cosines/                    # Per-layer cosine similarity arrays
-    energy/                     # Per-layer Ev/Et arrays
-    adapted/                    # Adapted feature selections
-    firing/                     # Per-layer firing frequency JSONs
-    spatial/                    # Spatial feature CSVs
-    lexical/                    # Lexical filtering results
-    final_features/             # Final intersection results
+  analysis/                     # Analysis outputs (suffixed _jumprelu for JumpReLU)
+    val_fvu_jumprelu/           # Validation FVU tables
+    cosines_jumprelu/           # Per-layer cosine similarity arrays
+    energy_jumprelu/            # Per-layer Ev/Et arrays
+    adapted_jumprelu/           # Adapted feature selections
+    firing_jumprelu/            # Per-layer firing frequency JSONs
+    spatial_jumprelu/           # Spatial feature CSVs
+    lexical_jumprelu/           # Lexical filtering results
+    final_features_jumprelu/    # Final intersection results
 ```
