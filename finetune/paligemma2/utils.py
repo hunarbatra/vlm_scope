@@ -307,8 +307,8 @@ class JumpReLUSAE(nn.Module):
         # Reconstruction loss
         recon_loss = (x - recon).pow(2).sum(dim=-1).mean()
 
-        # L0 sparsity via step function with STE gradient
-        l0 = _StepFunction.apply(pre_jump, self.threshold, bandwidth).sum(dim=-1).mean()
+        # L0 sparsity via step function with STE gradient (applied to f, not pre_jump)
+        l0 = _StepFunction.apply(f, self.threshold, bandwidth).sum(dim=-1).mean()
 
         # Sparsity penalty targeting l0 ≈ target_l0
         sparsity_loss = sparsity_coeff * ((l0 / target_l0) - 1).pow(2)
