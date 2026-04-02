@@ -1,13 +1,12 @@
 """
-Upload SAE checkpoints and cached activations from Modal Volume to HuggingFace.
+Upload SAE checkpoints and training logs from Modal Volume to HuggingFace.
+
+Uploads both TopK and JumpReLU checkpoints, intermediate checkpoints,
+and training logs.
 
 Usage:
     cd finetune/paligemma2
     MODAL_PROFILE=hunar-oxford modal run modal_upload_hf.py
-
-Creates two HF repos:
-  - hunarbatra/paligemma2-sae-checkpoints  (SAE weights, ~15GB)
-  - hunarbatra/paligemma2-vqav2-activations (cached H5 activations, large)
 """
 
 import os
@@ -31,13 +30,65 @@ image = (
 )
 
 
+def _upload_run(api, repo_id, run_name, run_dir, methods, hf_prefix):
+    """Upload checkpoints, intermediate checkpoints, and logs from a run directory."""
+    from pathlib import Path
+
+    checkpoint_dir = Path(run_dir) / "checkpoints"
+    log_dir = Path(run_dir) / "logs"
+
+    # Upload final checkpoints (skip optimizer states)
+    if checkpoint_dir.exists():
+        print(f"[INFO] Uploading {run_name} checkpoints...")
+        for method in methods:
+            for pt_file in sorted(checkpoint_dir.glob(f"{method}_layer_*.pt")):
+                if pt_file.name.endswith("_optim.pt"):
+                    continue
+                remote_path = f"{hf_prefix}/{method}/{pt_file.name}"
+                print(f"  {pt_file.name} -> {remote_path}")
+                api.upload_file(
+                    path_or_fileobj=str(pt_file),
+                    path_in_repo=remote_path,
+                    repo_id=repo_id,
+                    repo_type="model",
+                )
+
+    # Upload intermediate checkpoints (25/50/75%)
+    for pct in [25, 50, 75]:
+        pct_dir = Path(run_dir) / f"checkpoint_{pct}pct"
+        if not pct_dir.exists():
+            continue
+        for pt_file in sorted(pct_dir.glob("*.pt")):
+            remote_path = f"{hf_prefix}/intermediate/{pct}pct/{pt_file.name}"
+            print(f"  {pt_file.name} -> {remote_path}")
+            api.upload_file(
+                path_or_fileobj=str(pt_file),
+                path_in_repo=remote_path,
+                repo_id=repo_id,
+                repo_type="model",
+            )
+
+    # Upload training logs
+    if log_dir.exists():
+        print(f"[INFO] Uploading {run_name} training logs...")
+        for log_file in sorted(log_dir.glob("*.csv")):
+            remote_path = f"{hf_prefix}/logs/{log_file.name}"
+            print(f"  {log_file.name} -> {remote_path}")
+            api.upload_file(
+                path_or_fileobj=str(log_file),
+                path_in_repo=remote_path,
+                repo_id=repo_id,
+                repo_type="model",
+            )
+
+
 @app.function(
     image=image,
     volumes={"/vol": volume},
     timeout=86400,
 )
 def upload_checkpoints():
-    """Upload SAE checkpoints (pretrained + random) to HuggingFace."""
+    """Upload all SAE checkpoints (TopK + JumpReLU) to HuggingFace."""
     from pathlib import Path
     from huggingface_hub import HfApi, create_repo
 
@@ -47,71 +98,46 @@ def upload_checkpoints():
     # Create repo if needed
     create_repo(repo_id, repo_type="model", exist_ok=True, token=HF_TOKEN)
 
-    checkpoint_dir = Path(RESULTS_BASE) / "run" / "checkpoints"
-    log_dir = Path(RESULTS_BASE) / "run" / "logs"
+    # Upload TopK SAE run
+    topk_dir = Path(RESULTS_BASE) / "run"
+    if topk_dir.exists():
+        _upload_run(api, repo_id, "TopK", str(topk_dir),
+                    methods=["pretrained", "random"], hf_prefix="topk")
 
-    # Upload final checkpoints (skip optimizer states)
-    print("[INFO] Uploading SAE checkpoints...")
-    for method in ["pretrained", "random"]:
-        for pt_file in sorted(checkpoint_dir.glob(f"{method}_layer_*.pt")):
-            if pt_file.name.endswith("_optim.pt"):
-                continue
-            remote_path = f"{method}/{pt_file.name}"
-            print(f"  Uploading {pt_file.name} -> {remote_path}")
-            api.upload_file(
-                path_or_fileobj=str(pt_file),
-                path_in_repo=remote_path,
-                repo_id=repo_id,
-                repo_type="model",
-            )
-
-    # Upload intermediate checkpoints (25/50/75%)
-    run_dir = Path(RESULTS_BASE) / "run"
-    for pct in [25, 50, 75]:
-        pct_dir = run_dir / f"checkpoint_{pct}pct"
-        if not pct_dir.exists():
-            continue
-        for pt_file in sorted(pct_dir.glob("*.pt")):
-            remote_path = f"intermediate/{pct}pct/{pt_file.name}"
-            print(f"  Uploading {pt_file.name} -> {remote_path}")
-            api.upload_file(
-                path_or_fileobj=str(pt_file),
-                path_in_repo=remote_path,
-                repo_id=repo_id,
-                repo_type="model",
-            )
-
-    # Upload training logs
-    print("[INFO] Uploading training logs...")
-    for log_file in sorted(log_dir.glob("*.csv")):
-        remote_path = f"logs/{log_file.name}"
-        print(f"  Uploading {log_file.name} -> {remote_path}")
-        api.upload_file(
-            path_or_fileobj=str(log_file),
-            path_in_repo=remote_path,
-            repo_id=repo_id,
-            repo_type="model",
-        )
+    # Upload JumpReLU SAE run
+    jumprelu_dir = Path(RESULTS_BASE) / "run_jumprelu"
+    if jumprelu_dir.exists():
+        _upload_run(api, repo_id, "JumpReLU", str(jumprelu_dir),
+                    methods=["pretrained"], hf_prefix="jumprelu")
 
     # Upload a README
     readme = """# PaliGemma2-3B SAE Checkpoints
 
-Sparse Autoencoders (TopK, k=50) trained on PaliGemma2-3B residual stream activations using VQAv2.
+Sparse Autoencoders trained on PaliGemma2-3B residual stream activations using VQAv2.
 
 ## Architecture
 - **Base model**: google/paligemma2-3b-pt-224 (Gemma 2B backbone, 26 layers)
-- **SAE type**: TopK with k=50, width 16,384, d_in=2,304
+- **SAE width**: 16,384 features, d_in=2,304
 - **Training data**: 50,000 VQAv2 validation samples
-- **LR**: 2e-4 / sqrt(d_sae / 16384)
 
-## Methods
-- `pretrained/`: Initialized from Gemma Scope 2B residual SAEs, then fine-tuned on VQAv2
-- `random/`: Randomly initialized, trained on VQAv2
-- `intermediate/`: Checkpoints at 25%, 50%, 75% training (pretrained only)
+## TopK SAE (`topk/`)
+- **Activation**: top-k selection, k=50
+- **LR**: 2e-4 / sqrt(d_sae / 16384)
+- **Init**: Gemma Scope 2B (`pretrained/`) or random (`random/`)
+- Note: Architecture mismatch — Gemma Scope natively uses JumpReLU
+
+## JumpReLU SAE (`jumprelu/`) — Recommended
+- **Activation**: JumpReLU with learnable per-feature threshold
+- **LR**: 7e-5, Adam betas=(0.0, 0.999)
+- **Target L0**: 50, bandwidth=0.001, sparsity_coeff=1.0
+- **Warmup**: 1000-step LR warmup, 2000-step sparsity warmup
+- **Init**: Gemma Scope 2B (`pretrained/`) — architecture-matched, includes threshold
+- Based on: github.com/saprmarks/dictionary_learning JumpReLU trainer
 
 ## Files
-- `{method}_layer_{i}.pt`: SAE state_dict for layer i
-- `logs/metrics_{method}_layer_{i}.csv`: Training metrics (tokens, FVU, recon_loss, sparsity)
+- `{type}/{method}/pretrained_layer_{i}.pt`: SAE state_dict for layer i
+- `{type}/intermediate/{25,50,75}pct/`: Training dynamics checkpoints
+- `{type}/logs/metrics_{method}_layer_{i}.csv`: Training metrics
 """
     api.upload_file(
         path_or_fileobj=readme.encode(),
