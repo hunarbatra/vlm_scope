@@ -1,0 +1,15 @@
+{
+  "layer": 22,
+  "feature": 915,
+  "odds_ratio": 0.0,
+  "freq_diff": 0.0,
+  "abl_vsr": 50.5,
+  "abl_ctrl": 44.70588235294118,
+  "abl_vqa": 64.8,
+  "delta_vsr": -0.5,
+  "delta_ctrl": -4.705882352941174,
+  "delta_vqa": 1.1999999999999957,
+  "vsr_total": 2000,
+  "ctrl_total": 85,
+  "vqa_total": 500
+}
