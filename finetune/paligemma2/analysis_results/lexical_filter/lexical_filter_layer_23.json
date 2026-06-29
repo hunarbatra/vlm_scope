@@ -1,0 +1,2602 @@
+[
+  {
+    "layer": 23,
+    "feature": 124,
+    "generic_fire_count": 35,
+    "total_tests": 1000,
+    "fire_fraction": 0.035,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 198,
+    "generic_fire_count": 58,
+    "total_tests": 1000,
+    "fire_fraction": 0.058,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 209,
+    "generic_fire_count": 298,
+    "total_tests": 1000,
+    "fire_fraction": 0.298,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 309,
+    "generic_fire_count": 78,
+    "total_tests": 1000,
+    "fire_fraction": 0.078,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 318,
+    "generic_fire_count": 69,
+    "total_tests": 1000,
+    "fire_fraction": 0.069,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 325,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 365,
+    "generic_fire_count": 362,
+    "total_tests": 1000,
+    "fire_fraction": 0.362,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 385,
+    "generic_fire_count": 280,
+    "total_tests": 1000,
+    "fire_fraction": 0.28,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 422,
+    "generic_fire_count": 113,
+    "total_tests": 1000,
+    "fire_fraction": 0.113,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 441,
+    "generic_fire_count": 20,
+    "total_tests": 1000,
+    "fire_fraction": 0.02,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 456,
+    "generic_fire_count": 25,
+    "total_tests": 1000,
+    "fire_fraction": 0.025,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 508,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 516,
+    "generic_fire_count": 172,
+    "total_tests": 1000,
+    "fire_fraction": 0.172,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 585,
+    "generic_fire_count": 9,
+    "total_tests": 1000,
+    "fire_fraction": 0.009,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 680,
+    "generic_fire_count": 51,
+    "total_tests": 1000,
+    "fire_fraction": 0.051,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 802,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 901,
+    "generic_fire_count": 157,
+    "total_tests": 1000,
+    "fire_fraction": 0.157,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1002,
+    "generic_fire_count": 122,
+    "total_tests": 1000,
+    "fire_fraction": 0.122,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1032,
+    "generic_fire_count": 80,
+    "total_tests": 1000,
+    "fire_fraction": 0.08,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1150,
+    "generic_fire_count": 740,
+    "total_tests": 1000,
+    "fire_fraction": 0.74,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1184,
+    "generic_fire_count": 78,
+    "total_tests": 1000,
+    "fire_fraction": 0.078,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1193,
+    "generic_fire_count": 931,
+    "total_tests": 1000,
+    "fire_fraction": 0.931,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1212,
+    "generic_fire_count": 88,
+    "total_tests": 1000,
+    "fire_fraction": 0.088,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1230,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 1328,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 1329,
+    "generic_fire_count": 178,
+    "total_tests": 1000,
+    "fire_fraction": 0.178,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1367,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1386,
+    "generic_fire_count": 170,
+    "total_tests": 1000,
+    "fire_fraction": 0.17,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1408,
+    "generic_fire_count": 114,
+    "total_tests": 1000,
+    "fire_fraction": 0.114,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1508,
+    "generic_fire_count": 14,
+    "total_tests": 1000,
+    "fire_fraction": 0.014,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1516,
+    "generic_fire_count": 412,
+    "total_tests": 1000,
+    "fire_fraction": 0.412,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1624,
+    "generic_fire_count": 159,
+    "total_tests": 1000,
+    "fire_fraction": 0.159,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1643,
+    "generic_fire_count": 158,
+    "total_tests": 1000,
+    "fire_fraction": 0.158,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1735,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1804,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 1816,
+    "generic_fire_count": 27,
+    "total_tests": 1000,
+    "fire_fraction": 0.027,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 1929,
+    "generic_fire_count": 56,
+    "total_tests": 1000,
+    "fire_fraction": 0.056,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2052,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 2252,
+    "generic_fire_count": 38,
+    "total_tests": 1000,
+    "fire_fraction": 0.038,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2356,
+    "generic_fire_count": 480,
+    "total_tests": 1000,
+    "fire_fraction": 0.48,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2377,
+    "generic_fire_count": 103,
+    "total_tests": 1000,
+    "fire_fraction": 0.103,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2431,
+    "generic_fire_count": 190,
+    "total_tests": 1000,
+    "fire_fraction": 0.19,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2468,
+    "generic_fire_count": 46,
+    "total_tests": 1000,
+    "fire_fraction": 0.046,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2486,
+    "generic_fire_count": 29,
+    "total_tests": 1000,
+    "fire_fraction": 0.029,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2541,
+    "generic_fire_count": 426,
+    "total_tests": 1000,
+    "fire_fraction": 0.426,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2556,
+    "generic_fire_count": 309,
+    "total_tests": 1000,
+    "fire_fraction": 0.309,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2602,
+    "generic_fire_count": 384,
+    "total_tests": 1000,
+    "fire_fraction": 0.384,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2628,
+    "generic_fire_count": 76,
+    "total_tests": 1000,
+    "fire_fraction": 0.076,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2662,
+    "generic_fire_count": 153,
+    "total_tests": 1000,
+    "fire_fraction": 0.153,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2664,
+    "generic_fire_count": 221,
+    "total_tests": 1000,
+    "fire_fraction": 0.221,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2699,
+    "generic_fire_count": 10,
+    "total_tests": 1000,
+    "fire_fraction": 0.01,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2719,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 2724,
+    "generic_fire_count": 27,
+    "total_tests": 1000,
+    "fire_fraction": 0.027,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2757,
+    "generic_fire_count": 115,
+    "total_tests": 1000,
+    "fire_fraction": 0.115,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2769,
+    "generic_fire_count": 109,
+    "total_tests": 1000,
+    "fire_fraction": 0.109,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2811,
+    "generic_fire_count": 337,
+    "total_tests": 1000,
+    "fire_fraction": 0.337,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2825,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2879,
+    "generic_fire_count": 333,
+    "total_tests": 1000,
+    "fire_fraction": 0.333,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2919,
+    "generic_fire_count": 641,
+    "total_tests": 1000,
+    "fire_fraction": 0.641,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2947,
+    "generic_fire_count": 75,
+    "total_tests": 1000,
+    "fire_fraction": 0.075,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 2986,
+    "generic_fire_count": 428,
+    "total_tests": 1000,
+    "fire_fraction": 0.428,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3100,
+    "generic_fire_count": 117,
+    "total_tests": 1000,
+    "fire_fraction": 0.117,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3185,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3202,
+    "generic_fire_count": 118,
+    "total_tests": 1000,
+    "fire_fraction": 0.118,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3213,
+    "generic_fire_count": 8,
+    "total_tests": 1000,
+    "fire_fraction": 0.008,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 3240,
+    "generic_fire_count": 106,
+    "total_tests": 1000,
+    "fire_fraction": 0.106,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3264,
+    "generic_fire_count": 20,
+    "total_tests": 1000,
+    "fire_fraction": 0.02,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3552,
+    "generic_fire_count": 8,
+    "total_tests": 1000,
+    "fire_fraction": 0.008,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 3645,
+    "generic_fire_count": 333,
+    "total_tests": 1000,
+    "fire_fraction": 0.333,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3674,
+    "generic_fire_count": 99,
+    "total_tests": 1000,
+    "fire_fraction": 0.099,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3719,
+    "generic_fire_count": 12,
+    "total_tests": 1000,
+    "fire_fraction": 0.012,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3726,
+    "generic_fire_count": 161,
+    "total_tests": 1000,
+    "fire_fraction": 0.161,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3760,
+    "generic_fire_count": 96,
+    "total_tests": 1000,
+    "fire_fraction": 0.096,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3849,
+    "generic_fire_count": 363,
+    "total_tests": 1000,
+    "fire_fraction": 0.363,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3898,
+    "generic_fire_count": 54,
+    "total_tests": 1000,
+    "fire_fraction": 0.054,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 3935,
+    "generic_fire_count": 95,
+    "total_tests": 1000,
+    "fire_fraction": 0.095,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4086,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 4219,
+    "generic_fire_count": 20,
+    "total_tests": 1000,
+    "fire_fraction": 0.02,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4277,
+    "generic_fire_count": 485,
+    "total_tests": 1000,
+    "fire_fraction": 0.485,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4333,
+    "generic_fire_count": 25,
+    "total_tests": 1000,
+    "fire_fraction": 0.025,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4350,
+    "generic_fire_count": 11,
+    "total_tests": 1000,
+    "fire_fraction": 0.011,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4367,
+    "generic_fire_count": 33,
+    "total_tests": 1000,
+    "fire_fraction": 0.033,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4427,
+    "generic_fire_count": 72,
+    "total_tests": 1000,
+    "fire_fraction": 0.072,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4505,
+    "generic_fire_count": 21,
+    "total_tests": 1000,
+    "fire_fraction": 0.021,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4515,
+    "generic_fire_count": 83,
+    "total_tests": 1000,
+    "fire_fraction": 0.083,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4531,
+    "generic_fire_count": 20,
+    "total_tests": 1000,
+    "fire_fraction": 0.02,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4552,
+    "generic_fire_count": 41,
+    "total_tests": 1000,
+    "fire_fraction": 0.041,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4706,
+    "generic_fire_count": 25,
+    "total_tests": 1000,
+    "fire_fraction": 0.025,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4744,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 4754,
+    "generic_fire_count": 73,
+    "total_tests": 1000,
+    "fire_fraction": 0.073,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4833,
+    "generic_fire_count": 34,
+    "total_tests": 1000,
+    "fire_fraction": 0.034,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4932,
+    "generic_fire_count": 65,
+    "total_tests": 1000,
+    "fire_fraction": 0.065,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 4957,
+    "generic_fire_count": 549,
+    "total_tests": 1000,
+    "fire_fraction": 0.549,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5002,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5023,
+    "generic_fire_count": 139,
+    "total_tests": 1000,
+    "fire_fraction": 0.139,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5045,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5076,
+    "generic_fire_count": 663,
+    "total_tests": 1000,
+    "fire_fraction": 0.663,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5125,
+    "generic_fire_count": 119,
+    "total_tests": 1000,
+    "fire_fraction": 0.119,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5206,
+    "generic_fire_count": 12,
+    "total_tests": 1000,
+    "fire_fraction": 0.012,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5241,
+    "generic_fire_count": 198,
+    "total_tests": 1000,
+    "fire_fraction": 0.198,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5300,
+    "generic_fire_count": 30,
+    "total_tests": 1000,
+    "fire_fraction": 0.03,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5311,
+    "generic_fire_count": 50,
+    "total_tests": 1000,
+    "fire_fraction": 0.05,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5313,
+    "generic_fire_count": 310,
+    "total_tests": 1000,
+    "fire_fraction": 0.31,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5349,
+    "generic_fire_count": 249,
+    "total_tests": 1000,
+    "fire_fraction": 0.249,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5458,
+    "generic_fire_count": 366,
+    "total_tests": 1000,
+    "fire_fraction": 0.366,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5504,
+    "generic_fire_count": 88,
+    "total_tests": 1000,
+    "fire_fraction": 0.088,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5505,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 5564,
+    "generic_fire_count": 3,
+    "total_tests": 1000,
+    "fire_fraction": 0.003,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 5639,
+    "generic_fire_count": 69,
+    "total_tests": 1000,
+    "fire_fraction": 0.069,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5682,
+    "generic_fire_count": 170,
+    "total_tests": 1000,
+    "fire_fraction": 0.17,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5697,
+    "generic_fire_count": 406,
+    "total_tests": 1000,
+    "fire_fraction": 0.406,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5735,
+    "generic_fire_count": 46,
+    "total_tests": 1000,
+    "fire_fraction": 0.046,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5852,
+    "generic_fire_count": 88,
+    "total_tests": 1000,
+    "fire_fraction": 0.088,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 5889,
+    "generic_fire_count": 140,
+    "total_tests": 1000,
+    "fire_fraction": 0.14,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6105,
+    "generic_fire_count": 200,
+    "total_tests": 1000,
+    "fire_fraction": 0.2,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6200,
+    "generic_fire_count": 119,
+    "total_tests": 1000,
+    "fire_fraction": 0.119,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6246,
+    "generic_fire_count": 375,
+    "total_tests": 1000,
+    "fire_fraction": 0.375,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6289,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 6512,
+    "generic_fire_count": 104,
+    "total_tests": 1000,
+    "fire_fraction": 0.104,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6556,
+    "generic_fire_count": 390,
+    "total_tests": 1000,
+    "fire_fraction": 0.39,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6567,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6593,
+    "generic_fire_count": 70,
+    "total_tests": 1000,
+    "fire_fraction": 0.07,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6684,
+    "generic_fire_count": 116,
+    "total_tests": 1000,
+    "fire_fraction": 0.116,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6763,
+    "generic_fire_count": 73,
+    "total_tests": 1000,
+    "fire_fraction": 0.073,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 6847,
+    "generic_fire_count": 379,
+    "total_tests": 1000,
+    "fire_fraction": 0.379,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7058,
+    "generic_fire_count": 118,
+    "total_tests": 1000,
+    "fire_fraction": 0.118,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7079,
+    "generic_fire_count": 47,
+    "total_tests": 1000,
+    "fire_fraction": 0.047,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7123,
+    "generic_fire_count": 99,
+    "total_tests": 1000,
+    "fire_fraction": 0.099,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7128,
+    "generic_fire_count": 30,
+    "total_tests": 1000,
+    "fire_fraction": 0.03,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7129,
+    "generic_fire_count": 7,
+    "total_tests": 1000,
+    "fire_fraction": 0.007,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 7180,
+    "generic_fire_count": 356,
+    "total_tests": 1000,
+    "fire_fraction": 0.356,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7217,
+    "generic_fire_count": 398,
+    "total_tests": 1000,
+    "fire_fraction": 0.398,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7247,
+    "generic_fire_count": 99,
+    "total_tests": 1000,
+    "fire_fraction": 0.099,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7351,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 7354,
+    "generic_fire_count": 22,
+    "total_tests": 1000,
+    "fire_fraction": 0.022,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7361,
+    "generic_fire_count": 68,
+    "total_tests": 1000,
+    "fire_fraction": 0.068,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7372,
+    "generic_fire_count": 907,
+    "total_tests": 1000,
+    "fire_fraction": 0.907,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7381,
+    "generic_fire_count": 70,
+    "total_tests": 1000,
+    "fire_fraction": 0.07,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7391,
+    "generic_fire_count": 87,
+    "total_tests": 1000,
+    "fire_fraction": 0.087,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7396,
+    "generic_fire_count": 164,
+    "total_tests": 1000,
+    "fire_fraction": 0.164,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7531,
+    "generic_fire_count": 95,
+    "total_tests": 1000,
+    "fire_fraction": 0.095,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7626,
+    "generic_fire_count": 139,
+    "total_tests": 1000,
+    "fire_fraction": 0.139,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7645,
+    "generic_fire_count": 585,
+    "total_tests": 1000,
+    "fire_fraction": 0.585,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7703,
+    "generic_fire_count": 10,
+    "total_tests": 1000,
+    "fire_fraction": 0.01,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7781,
+    "generic_fire_count": 18,
+    "total_tests": 1000,
+    "fire_fraction": 0.018,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7794,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 7875,
+    "generic_fire_count": 20,
+    "total_tests": 1000,
+    "fire_fraction": 0.02,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7951,
+    "generic_fire_count": 731,
+    "total_tests": 1000,
+    "fire_fraction": 0.731,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 7999,
+    "generic_fire_count": 978,
+    "total_tests": 1000,
+    "fire_fraction": 0.978,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8003,
+    "generic_fire_count": 350,
+    "total_tests": 1000,
+    "fire_fraction": 0.35,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8097,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 8157,
+    "generic_fire_count": 202,
+    "total_tests": 1000,
+    "fire_fraction": 0.202,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8226,
+    "generic_fire_count": 3,
+    "total_tests": 1000,
+    "fire_fraction": 0.003,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 8227,
+    "generic_fire_count": 491,
+    "total_tests": 1000,
+    "fire_fraction": 0.491,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8260,
+    "generic_fire_count": 30,
+    "total_tests": 1000,
+    "fire_fraction": 0.03,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8272,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 8341,
+    "generic_fire_count": 205,
+    "total_tests": 1000,
+    "fire_fraction": 0.205,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8392,
+    "generic_fire_count": 461,
+    "total_tests": 1000,
+    "fire_fraction": 0.461,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8398,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8408,
+    "generic_fire_count": 67,
+    "total_tests": 1000,
+    "fire_fraction": 0.067,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8426,
+    "generic_fire_count": 817,
+    "total_tests": 1000,
+    "fire_fraction": 0.817,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8441,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 8454,
+    "generic_fire_count": 213,
+    "total_tests": 1000,
+    "fire_fraction": 0.213,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8515,
+    "generic_fire_count": 7,
+    "total_tests": 1000,
+    "fire_fraction": 0.007,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 8595,
+    "generic_fire_count": 55,
+    "total_tests": 1000,
+    "fire_fraction": 0.055,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8607,
+    "generic_fire_count": 445,
+    "total_tests": 1000,
+    "fire_fraction": 0.445,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8744,
+    "generic_fire_count": 254,
+    "total_tests": 1000,
+    "fire_fraction": 0.254,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8791,
+    "generic_fire_count": 57,
+    "total_tests": 1000,
+    "fire_fraction": 0.057,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8830,
+    "generic_fire_count": 498,
+    "total_tests": 1000,
+    "fire_fraction": 0.498,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8895,
+    "generic_fire_count": 89,
+    "total_tests": 1000,
+    "fire_fraction": 0.089,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8897,
+    "generic_fire_count": 12,
+    "total_tests": 1000,
+    "fire_fraction": 0.012,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8935,
+    "generic_fire_count": 12,
+    "total_tests": 1000,
+    "fire_fraction": 0.012,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8943,
+    "generic_fire_count": 51,
+    "total_tests": 1000,
+    "fire_fraction": 0.051,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 8981,
+    "generic_fire_count": 27,
+    "total_tests": 1000,
+    "fire_fraction": 0.027,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9004,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 9029,
+    "generic_fire_count": 28,
+    "total_tests": 1000,
+    "fire_fraction": 0.028,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9160,
+    "generic_fire_count": 23,
+    "total_tests": 1000,
+    "fire_fraction": 0.023,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9251,
+    "generic_fire_count": 205,
+    "total_tests": 1000,
+    "fire_fraction": 0.205,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9351,
+    "generic_fire_count": 973,
+    "total_tests": 1000,
+    "fire_fraction": 0.973,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9593,
+    "generic_fire_count": 76,
+    "total_tests": 1000,
+    "fire_fraction": 0.076,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9622,
+    "generic_fire_count": 990,
+    "total_tests": 1000,
+    "fire_fraction": 0.99,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9627,
+    "generic_fire_count": 55,
+    "total_tests": 1000,
+    "fire_fraction": 0.055,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9637,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9706,
+    "generic_fire_count": 260,
+    "total_tests": 1000,
+    "fire_fraction": 0.26,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9723,
+    "generic_fire_count": 64,
+    "total_tests": 1000,
+    "fire_fraction": 0.064,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9771,
+    "generic_fire_count": 76,
+    "total_tests": 1000,
+    "fire_fraction": 0.076,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9776,
+    "generic_fire_count": 55,
+    "total_tests": 1000,
+    "fire_fraction": 0.055,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9839,
+    "generic_fire_count": 16,
+    "total_tests": 1000,
+    "fire_fraction": 0.016,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9856,
+    "generic_fire_count": 357,
+    "total_tests": 1000,
+    "fire_fraction": 0.357,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9857,
+    "generic_fire_count": 490,
+    "total_tests": 1000,
+    "fire_fraction": 0.49,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9884,
+    "generic_fire_count": 148,
+    "total_tests": 1000,
+    "fire_fraction": 0.148,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9915,
+    "generic_fire_count": 33,
+    "total_tests": 1000,
+    "fire_fraction": 0.033,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9921,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 9936,
+    "generic_fire_count": 512,
+    "total_tests": 1000,
+    "fire_fraction": 0.512,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 9956,
+    "generic_fire_count": 230,
+    "total_tests": 1000,
+    "fire_fraction": 0.23,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10038,
+    "generic_fire_count": 56,
+    "total_tests": 1000,
+    "fire_fraction": 0.056,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10304,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10345,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 10408,
+    "generic_fire_count": 45,
+    "total_tests": 1000,
+    "fire_fraction": 0.045,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10437,
+    "generic_fire_count": 64,
+    "total_tests": 1000,
+    "fire_fraction": 0.064,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10494,
+    "generic_fire_count": 129,
+    "total_tests": 1000,
+    "fire_fraction": 0.129,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10692,
+    "generic_fire_count": 201,
+    "total_tests": 1000,
+    "fire_fraction": 0.201,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10772,
+    "generic_fire_count": 179,
+    "total_tests": 1000,
+    "fire_fraction": 0.179,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10802,
+    "generic_fire_count": 652,
+    "total_tests": 1000,
+    "fire_fraction": 0.652,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10986,
+    "generic_fire_count": 199,
+    "total_tests": 1000,
+    "fire_fraction": 0.199,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10994,
+    "generic_fire_count": 956,
+    "total_tests": 1000,
+    "fire_fraction": 0.956,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 10995,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 11034,
+    "generic_fire_count": 50,
+    "total_tests": 1000,
+    "fire_fraction": 0.05,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11061,
+    "generic_fire_count": 308,
+    "total_tests": 1000,
+    "fire_fraction": 0.308,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11096,
+    "generic_fire_count": 62,
+    "total_tests": 1000,
+    "fire_fraction": 0.062,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11134,
+    "generic_fire_count": 183,
+    "total_tests": 1000,
+    "fire_fraction": 0.183,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11146,
+    "generic_fire_count": 83,
+    "total_tests": 1000,
+    "fire_fraction": 0.083,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11211,
+    "generic_fire_count": 130,
+    "total_tests": 1000,
+    "fire_fraction": 0.13,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11247,
+    "generic_fire_count": 50,
+    "total_tests": 1000,
+    "fire_fraction": 0.05,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11263,
+    "generic_fire_count": 43,
+    "total_tests": 1000,
+    "fire_fraction": 0.043,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11275,
+    "generic_fire_count": 163,
+    "total_tests": 1000,
+    "fire_fraction": 0.163,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11397,
+    "generic_fire_count": 31,
+    "total_tests": 1000,
+    "fire_fraction": 0.031,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11426,
+    "generic_fire_count": 34,
+    "total_tests": 1000,
+    "fire_fraction": 0.034,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11490,
+    "generic_fire_count": 53,
+    "total_tests": 1000,
+    "fire_fraction": 0.053,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11501,
+    "generic_fire_count": 993,
+    "total_tests": 1000,
+    "fire_fraction": 0.993,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11528,
+    "generic_fire_count": 37,
+    "total_tests": 1000,
+    "fire_fraction": 0.037,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11578,
+    "generic_fire_count": 181,
+    "total_tests": 1000,
+    "fire_fraction": 0.181,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11681,
+    "generic_fire_count": 215,
+    "total_tests": 1000,
+    "fire_fraction": 0.215,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11702,
+    "generic_fire_count": 910,
+    "total_tests": 1000,
+    "fire_fraction": 0.91,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11704,
+    "generic_fire_count": 330,
+    "total_tests": 1000,
+    "fire_fraction": 0.33,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11719,
+    "generic_fire_count": 38,
+    "total_tests": 1000,
+    "fire_fraction": 0.038,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11739,
+    "generic_fire_count": 508,
+    "total_tests": 1000,
+    "fire_fraction": 0.508,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11788,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 11944,
+    "generic_fire_count": 74,
+    "total_tests": 1000,
+    "fire_fraction": 0.074,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 11957,
+    "generic_fire_count": 151,
+    "total_tests": 1000,
+    "fire_fraction": 0.151,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12011,
+    "generic_fire_count": 9,
+    "total_tests": 1000,
+    "fire_fraction": 0.009,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 12021,
+    "generic_fire_count": 147,
+    "total_tests": 1000,
+    "fire_fraction": 0.147,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12034,
+    "generic_fire_count": 30,
+    "total_tests": 1000,
+    "fire_fraction": 0.03,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12073,
+    "generic_fire_count": 17,
+    "total_tests": 1000,
+    "fire_fraction": 0.017,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12126,
+    "generic_fire_count": 23,
+    "total_tests": 1000,
+    "fire_fraction": 0.023,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12127,
+    "generic_fire_count": 22,
+    "total_tests": 1000,
+    "fire_fraction": 0.022,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12131,
+    "generic_fire_count": 44,
+    "total_tests": 1000,
+    "fire_fraction": 0.044,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12247,
+    "generic_fire_count": 229,
+    "total_tests": 1000,
+    "fire_fraction": 0.229,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12373,
+    "generic_fire_count": 30,
+    "total_tests": 1000,
+    "fire_fraction": 0.03,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12418,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12468,
+    "generic_fire_count": 148,
+    "total_tests": 1000,
+    "fire_fraction": 0.148,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12509,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12514,
+    "generic_fire_count": 18,
+    "total_tests": 1000,
+    "fire_fraction": 0.018,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12516,
+    "generic_fire_count": 8,
+    "total_tests": 1000,
+    "fire_fraction": 0.008,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 12539,
+    "generic_fire_count": 21,
+    "total_tests": 1000,
+    "fire_fraction": 0.021,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12580,
+    "generic_fire_count": 21,
+    "total_tests": 1000,
+    "fire_fraction": 0.021,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12753,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12775,
+    "generic_fire_count": 37,
+    "total_tests": 1000,
+    "fire_fraction": 0.037,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12779,
+    "generic_fire_count": 628,
+    "total_tests": 1000,
+    "fire_fraction": 0.628,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12895,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12954,
+    "generic_fire_count": 432,
+    "total_tests": 1000,
+    "fire_fraction": 0.432,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 12998,
+    "generic_fire_count": 62,
+    "total_tests": 1000,
+    "fire_fraction": 0.062,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13045,
+    "generic_fire_count": 53,
+    "total_tests": 1000,
+    "fire_fraction": 0.053,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13106,
+    "generic_fire_count": 525,
+    "total_tests": 1000,
+    "fire_fraction": 0.525,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13114,
+    "generic_fire_count": 24,
+    "total_tests": 1000,
+    "fire_fraction": 0.024,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13143,
+    "generic_fire_count": 33,
+    "total_tests": 1000,
+    "fire_fraction": 0.033,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13294,
+    "generic_fire_count": 44,
+    "total_tests": 1000,
+    "fire_fraction": 0.044,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13303,
+    "generic_fire_count": 50,
+    "total_tests": 1000,
+    "fire_fraction": 0.05,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13304,
+    "generic_fire_count": 87,
+    "total_tests": 1000,
+    "fire_fraction": 0.087,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13495,
+    "generic_fire_count": 89,
+    "total_tests": 1000,
+    "fire_fraction": 0.089,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13513,
+    "generic_fire_count": 3,
+    "total_tests": 1000,
+    "fire_fraction": 0.003,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 13549,
+    "generic_fire_count": 122,
+    "total_tests": 1000,
+    "fire_fraction": 0.122,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13653,
+    "generic_fire_count": 269,
+    "total_tests": 1000,
+    "fire_fraction": 0.269,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13749,
+    "generic_fire_count": 104,
+    "total_tests": 1000,
+    "fire_fraction": 0.104,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13759,
+    "generic_fire_count": 46,
+    "total_tests": 1000,
+    "fire_fraction": 0.046,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13762,
+    "generic_fire_count": 3,
+    "total_tests": 1000,
+    "fire_fraction": 0.003,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 13784,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 13802,
+    "generic_fire_count": 946,
+    "total_tests": 1000,
+    "fire_fraction": 0.946,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13848,
+    "generic_fire_count": 123,
+    "total_tests": 1000,
+    "fire_fraction": 0.123,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13880,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 13884,
+    "generic_fire_count": 56,
+    "total_tests": 1000,
+    "fire_fraction": 0.056,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13892,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 13910,
+    "generic_fire_count": 156,
+    "total_tests": 1000,
+    "fire_fraction": 0.156,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13926,
+    "generic_fire_count": 216,
+    "total_tests": 1000,
+    "fire_fraction": 0.216,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13958,
+    "generic_fire_count": 23,
+    "total_tests": 1000,
+    "fire_fraction": 0.023,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 13977,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14043,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 14067,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14128,
+    "generic_fire_count": 244,
+    "total_tests": 1000,
+    "fire_fraction": 0.244,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14147,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 14187,
+    "generic_fire_count": 290,
+    "total_tests": 1000,
+    "fire_fraction": 0.29,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14250,
+    "generic_fire_count": 201,
+    "total_tests": 1000,
+    "fire_fraction": 0.201,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14254,
+    "generic_fire_count": 203,
+    "total_tests": 1000,
+    "fire_fraction": 0.203,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14363,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 14394,
+    "generic_fire_count": 82,
+    "total_tests": 1000,
+    "fire_fraction": 0.082,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14473,
+    "generic_fire_count": 252,
+    "total_tests": 1000,
+    "fire_fraction": 0.252,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14531,
+    "generic_fire_count": 23,
+    "total_tests": 1000,
+    "fire_fraction": 0.023,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14544,
+    "generic_fire_count": 195,
+    "total_tests": 1000,
+    "fire_fraction": 0.195,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14563,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14578,
+    "generic_fire_count": 190,
+    "total_tests": 1000,
+    "fire_fraction": 0.19,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14584,
+    "generic_fire_count": 316,
+    "total_tests": 1000,
+    "fire_fraction": 0.316,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14595,
+    "generic_fire_count": 206,
+    "total_tests": 1000,
+    "fire_fraction": 0.206,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14613,
+    "generic_fire_count": 997,
+    "total_tests": 1000,
+    "fire_fraction": 0.997,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14620,
+    "generic_fire_count": 36,
+    "total_tests": 1000,
+    "fire_fraction": 0.036,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14648,
+    "generic_fire_count": 50,
+    "total_tests": 1000,
+    "fire_fraction": 0.05,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14757,
+    "generic_fire_count": 364,
+    "total_tests": 1000,
+    "fire_fraction": 0.364,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14888,
+    "generic_fire_count": 62,
+    "total_tests": 1000,
+    "fire_fraction": 0.062,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 14893,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 15163,
+    "generic_fire_count": 58,
+    "total_tests": 1000,
+    "fire_fraction": 0.058,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15278,
+    "generic_fire_count": 351,
+    "total_tests": 1000,
+    "fire_fraction": 0.351,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15303,
+    "generic_fire_count": 32,
+    "total_tests": 1000,
+    "fire_fraction": 0.032,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15325,
+    "generic_fire_count": 22,
+    "total_tests": 1000,
+    "fire_fraction": 0.022,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15326,
+    "generic_fire_count": 34,
+    "total_tests": 1000,
+    "fire_fraction": 0.034,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15369,
+    "generic_fire_count": 300,
+    "total_tests": 1000,
+    "fire_fraction": 0.3,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15409,
+    "generic_fire_count": 6,
+    "total_tests": 1000,
+    "fire_fraction": 0.006,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 15528,
+    "generic_fire_count": 4,
+    "total_tests": 1000,
+    "fire_fraction": 0.004,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 15550,
+    "generic_fire_count": 412,
+    "total_tests": 1000,
+    "fire_fraction": 0.412,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15588,
+    "generic_fire_count": 56,
+    "total_tests": 1000,
+    "fire_fraction": 0.056,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15590,
+    "generic_fire_count": 81,
+    "total_tests": 1000,
+    "fire_fraction": 0.081,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15592,
+    "generic_fire_count": 202,
+    "total_tests": 1000,
+    "fire_fraction": 0.202,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15782,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 15791,
+    "generic_fire_count": 404,
+    "total_tests": 1000,
+    "fire_fraction": 0.404,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15891,
+    "generic_fire_count": 11,
+    "total_tests": 1000,
+    "fire_fraction": 0.011,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15914,
+    "generic_fire_count": 413,
+    "total_tests": 1000,
+    "fire_fraction": 0.413,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15926,
+    "generic_fire_count": 21,
+    "total_tests": 1000,
+    "fire_fraction": 0.021,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15942,
+    "generic_fire_count": 182,
+    "total_tests": 1000,
+    "fire_fraction": 0.182,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 15961,
+    "generic_fire_count": 916,
+    "total_tests": 1000,
+    "fire_fraction": 0.916,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 16000,
+    "generic_fire_count": 21,
+    "total_tests": 1000,
+    "fire_fraction": 0.021,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 16027,
+    "generic_fire_count": 398,
+    "total_tests": 1000,
+    "fire_fraction": 0.398,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 16039,
+    "generic_fire_count": 4,
+    "total_tests": 1000,
+    "fire_fraction": 0.004,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 16069,
+    "generic_fire_count": 48,
+    "total_tests": 1000,
+    "fire_fraction": 0.048,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 16144,
+    "generic_fire_count": 56,
+    "total_tests": 1000,
+    "fire_fraction": 0.056,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 23,
+    "feature": 16250,
+    "generic_fire_count": 3,
+    "total_tests": 1000,
+    "fire_fraction": 0.003,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 16285,
+    "generic_fire_count": 0,
+    "total_tests": 1000,
+    "fire_fraction": 0.0,
+    "passed_lexical_filter": false
+  },
+  {
+    "layer": 23,
+    "feature": 16353,
+    "generic_fire_count": 185,
+    "total_tests": 1000,
+    "fire_fraction": 0.185,
+    "passed_lexical_filter": true
+  }
+]
