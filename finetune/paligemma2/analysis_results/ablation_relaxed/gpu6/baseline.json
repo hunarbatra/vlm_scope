@@ -1,0 +1,8 @@
+{
+  "vsr_acc": 51.0,
+  "vsr_total": 2000,
+  "ctrl_acc": 49.411764705882355,
+  "ctrl_total": 85,
+  "vqa_acc": 63.6,
+  "vqa_total": 500
+}
