@@ -1,0 +1,34 @@
+[
+  {
+    "layer": 15,
+    "feature": 5074,
+    "generic_fire_count": 15,
+    "total_tests": 1000,
+    "fire_fraction": 0.015,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 15,
+    "feature": 7447,
+    "generic_fire_count": 277,
+    "total_tests": 1000,
+    "fire_fraction": 0.277,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 15,
+    "feature": 8901,
+    "generic_fire_count": 116,
+    "total_tests": 1000,
+    "fire_fraction": 0.116,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 15,
+    "feature": 15574,
+    "generic_fire_count": 191,
+    "total_tests": 1000,
+    "fire_fraction": 0.191,
+    "passed_lexical_filter": true
+  }
+]
