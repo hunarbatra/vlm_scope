@@ -1,0 +1,10 @@
+{
+  "total_spatial_all": 40227,
+  "total_spatial_adapted": 13322,
+  "odds_threshold": 2.0,
+  "min_freq_diff": 0.005,
+  "fdr_method": "global_bh",
+  "n_vqa": 50000,
+  "n_vsr": 7529,
+  "method": "VQA vs VSR sample-level, Fisher exact, global FDR"
+}
