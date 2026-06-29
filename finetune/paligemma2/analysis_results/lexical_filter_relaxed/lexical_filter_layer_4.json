@@ -1,0 +1,26 @@
+[
+  {
+    "layer": 4,
+    "feature": 11756,
+    "generic_fire_count": 1000,
+    "total_tests": 1000,
+    "fire_fraction": 1.0,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 4,
+    "feature": 12355,
+    "generic_fire_count": 675,
+    "total_tests": 1000,
+    "fire_fraction": 0.675,
+    "passed_lexical_filter": true
+  },
+  {
+    "layer": 4,
+    "feature": 16171,
+    "generic_fire_count": 1000,
+    "total_tests": 1000,
+    "fire_fraction": 1.0,
+    "passed_lexical_filter": true
+  }
+]
