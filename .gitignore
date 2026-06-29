@@ -30,3 +30,8 @@ __pycache__/
 analysis/
 analysis_docvqa/
 *.bak
+
+# More large analysis artifacts
+**/data_cache/
+**/firing_pertoken/fisher_all_pertoken.csv
+*.pkl
