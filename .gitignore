@@ -1,59 +1,31 @@
-# Large data files that exceed GitHub's 100MB limit
-results/stage_4/feature_samples/full/vqa_hallucinated/vqa_feature_samples_summary.csv
-results/stage_4/feature_samples/full/vqa_spatial_all_spatial/vqa_spatial_feature_samples.json
-results/stage_4/feature_samples/full/vqa_ocr/vqa_feature_samples.json
-results/stage_4/feature_samples/full/vqa_hallucinated/vqa_feature_samples.json
-results/stage_4/feature_samples/full/vqa_spatial_all_spatial/vqa_spatial_feature_samples_summary.csv
-results/stage_4/feature_samples/full/vqa_all_spatial/vqa_feature_samples.json
-results/stage_4/feature_samples/full/vqa_all_spatial/vqa_feature_samples_summary.csv
+# Secrets
+.env
+*.env
 
-# Other large files
-*.json
-*.csv
+# Model checkpoints (too large)
+checkpoints/
 *.pt
-*.pkl
-*.npy
-*.h5
-*.hdf5
+*.bin
+*.safetensors
 
-# Cache directories
-.cache/
+# Large analysis caches
+**/paired_contrast_cache/
+**/paired_cache_ocrprompt/
+**/paired_cache_mcq/
+**/mix_hidden_cache/
+**/analysis/pt448_hidden_delta/
+
+# HF caches
+hf_cache/
+hf_datasets_cache/
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS files
-.DS_Store
-Thumbs.db
 
 # Logs
 *.log
-logs/
 
-# Temporary files
-*.tmp
-*.temp
+# Large outputs (>50MB)
+analysis/
+analysis_docvqa/
