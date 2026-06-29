@@ -1,0 +1,8 @@
+{
+  "acc": 0.638,
+  "correct": 319,
+  "total": 500,
+  "mean_p": 0.565162109375,
+  "split": "validation",
+  "n_samples": 500
+}
