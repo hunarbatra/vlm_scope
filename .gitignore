@@ -29,3 +29,4 @@ __pycache__/
 # Large outputs (>50MB)
 analysis/
 analysis_docvqa/
+*.bak
