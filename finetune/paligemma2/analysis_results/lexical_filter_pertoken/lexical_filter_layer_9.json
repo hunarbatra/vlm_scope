@@ -1,0 +1,10 @@
+[
+  {
+    "layer": 9,
+    "feature": 15031,
+    "generic_fire_count": 111,
+    "total_tests": 1000,
+    "fire_fraction": 0.111,
+    "passed_lexical_filter": true
+  }
+]
