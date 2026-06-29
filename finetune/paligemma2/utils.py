@@ -27,7 +27,10 @@ from huggingface_hub import hf_hub_download
 
 # ---------- Model ----------
 
-NUM_IMAGE_TOKENS = 256  # PaliGemma2-3B with 224x224 input
+# Default image token counts by resolution (patch_size=14)
+# 224px: (224/14)^2 = 256, 448px: (448/14)^2 = 1024
+NUM_IMAGE_TOKENS_BY_RES = {224: 256, 448: 1024}
+NUM_IMAGE_TOKENS = 256  # Fallback for 224x224; overridden dynamically in get_image_token_positions
 
 def initialize_vlm_model(model_name="google/paligemma2-3b-pt-224", device="cpu"):
     """Load PaliGemma2-3B model and processor."""
@@ -59,7 +62,7 @@ def process_vlm_inputs(image, prompt, processor, model, device=None):
     return inputs["input_ids"], inputs["attention_mask"], inputs.get("pixel_values")
 
 
-def get_image_token_positions(input_ids):
+def get_image_token_positions(input_ids, model=None):
     """Return (start, end) of image token span.
 
     PaliGemma2 prepends image tokens at the beginning of the sequence.
@@ -81,9 +84,16 @@ def get_image_token_positions(input_ids):
             break
 
     if start is None:
-        # Fallback: assume first NUM_IMAGE_TOKENS tokens are image
+        # Fallback: infer from model config or use default
+        fallback = NUM_IMAGE_TOKENS
+        if model is not None:
+            try:
+                img_size = model.config.vision_config.image_size
+                fallback = NUM_IMAGE_TOKENS_BY_RES.get(img_size, fallback)
+            except AttributeError:
+                pass
         start = 0
-        end = min(NUM_IMAGE_TOKENS, len(ids))
+        end = min(fallback, len(ids))
 
     return (start, end)
 
@@ -196,7 +206,10 @@ def initialize_sae(layer_idx: int = 0, checkpoint_path=None, initialize_random=F
 # ---------- JumpReLU SAE ----------
 
 class _RectangleFunction(autograd.Function):
-    """STE approximation for indicator function derivative."""
+    """STE approximation for indicator function derivative.
+
+    Matches saprmarks/dictionary_learning RectangleFunction exactly.
+    """
     @staticmethod
     def forward(ctx, x):
         ctx.save_for_backward(x)
@@ -211,7 +224,10 @@ class _RectangleFunction(autograd.Function):
 
 
 class _JumpReLUFunction(autograd.Function):
-    """JumpReLU activation with STE gradient for threshold."""
+    """JumpReLU activation with STE gradient for threshold.
+
+    Matches saprmarks/dictionary_learning JumpReLUFunction exactly.
+    """
     @staticmethod
     def forward(ctx, x, threshold, bandwidth):
         ctx.save_for_backward(x, threshold, torch.tensor(bandwidth))
@@ -231,7 +247,10 @@ class _JumpReLUFunction(autograd.Function):
 
 
 class _StepFunction(autograd.Function):
-    """Step function with STE gradient for threshold (used in L0 computation)."""
+    """Step function with STE gradient for threshold (used in L0 computation).
+
+    Matches saprmarks/dictionary_learning StepFunction exactly.
+    """
     @staticmethod
     def forward(ctx, x, threshold, bandwidth):
         ctx.save_for_backward(x, threshold, torch.tensor(bandwidth))
@@ -253,16 +272,19 @@ class _StepFunction(autograd.Function):
 class JumpReLUSAE(nn.Module):
     """JumpReLU Sparse Autoencoder matching Gemma Scope architecture.
 
+    Matches saprmarks/dictionary_learning JumpReluAutoEncoder for training,
+    and DrejcPesjak/auto-gemmascope JumpReLUSAE for inference.
+
     Architecture:
-        encode: x @ W_enc + b_enc -> JumpReLU(pre_act, threshold)
+        encode: pre = x @ W_enc + b_enc -> ReLU(pre) * (pre > threshold)
         decode: f @ W_dec + b_dec
 
-    Parameters:
-        W_enc: (d_in, d_sae) — encoder weights
-        W_dec: (d_sae, d_in) — decoder weights (unit-norm rows)
-        b_enc: (d_sae,) — encoder bias
-        b_dec: (d_in,) — decoder bias
-        threshold: (d_sae,) — per-feature JumpReLU threshold (learnable)
+    Training follows saprmarks reference:
+        - Raw threshold parameter (not log_threshold)
+        - L0 computed on post-activation f (not pre_jump)
+        - Target-tracking loss: ((l0/target_l0) - 1)^2
+        - bandwidth=0.001
+        - No threshold scaling in set_decoder_norm_to_unit_norm
     """
 
     def __init__(self, d_in: int, d_sae: int, device="cpu"):
@@ -281,22 +303,31 @@ class JumpReLUSAE(nn.Module):
         self.W_dec.data = self.W_dec / self.W_dec.norm(dim=1, keepdim=True).clamp(min=1e-8)
         self.W_enc.data = self.W_dec.data.clone().T
 
-    def encode(self, x, bandwidth=0.001):
-        """Encode activations through JumpReLU."""
+    def encode(self, x):
+        """Encode activations through JumpReLU.
+
+        Matches auto-gemmascope and saprmarks: mask * ReLU(pre_jump)
+        """
         pre_jump = x @ self.W_enc + self.b_enc
-        return _JumpReLUFunction.apply(pre_jump, self.threshold, bandwidth)
+        mask = (pre_jump > self.threshold)
+        return mask * torch.nn.functional.relu(pre_jump)
 
     def decode(self, f):
         """Decode sparse features back to activation space."""
         return f @ self.W_dec + self.b_dec
 
-    def forward(self, x, bandwidth=0.001):
+    def forward(self, x):
         """Full forward pass: encode then decode."""
-        f = self.encode(x, bandwidth=bandwidth)
+        f = self.encode(x)
         return self.decode(f)
 
     def compute_loss(self, x, bandwidth=0.001, target_l0=50.0, sparsity_coeff=1.0):
-        """Compute reconstruction + sparsity loss.
+        """Compute reconstruction + target-tracking L0 sparsity loss.
+
+        Matches saprmarks/dictionary_learning JumpReluTrainer.loss() exactly:
+        - JumpReLU forward uses autograd function (for threshold gradients)
+        - L0 computed via StepFunction on post-activation f
+        - Sparsity loss = coeff * ((l0/target) - 1)^2
 
         Returns (loss, recon_loss, l0, fvu) for logging.
         """
@@ -307,10 +338,10 @@ class JumpReLUSAE(nn.Module):
         # Reconstruction loss
         recon_loss = (x - recon).pow(2).sum(dim=-1).mean()
 
-        # L0 sparsity via step function with STE gradient (applied to f, not pre_jump)
+        # L0 via StepFunction on f (post-activation), matching saprmarks reference
         l0 = _StepFunction.apply(f, self.threshold, bandwidth).sum(dim=-1).mean()
 
-        # Sparsity penalty targeting l0 ≈ target_l0
+        # Target-tracking sparsity loss: penalize deviation from target L0
         sparsity_loss = sparsity_coeff * ((l0 / target_l0) - 1).pow(2)
 
         loss = recon_loss + sparsity_loss
@@ -323,7 +354,10 @@ class JumpReLUSAE(nn.Module):
         return loss, recon_loss.item(), l0.item(), fvu.item()
 
     def set_decoder_norm_to_unit_norm(self):
-        """Normalize decoder weight rows to unit norm."""
+        """Normalize decoder weight rows to unit norm.
+
+        Does NOT scale threshold — matches saprmarks reference.
+        """
         with torch.no_grad():
             norms = self.W_dec.norm(dim=1, keepdim=True).clamp(min=1e-8)
             self.W_dec.div_(norms)
@@ -332,9 +366,14 @@ class JumpReLUSAE(nn.Module):
         """Remove component of W_dec gradient parallel to W_dec (keeps perpendicular)."""
         if self.W_dec.grad is not None:
             with torch.no_grad():
-                # W_dec: (d_sae, d_in), each row is a unit vector
                 parallel = (self.W_dec.grad * self.W_dec).sum(dim=1, keepdim=True) * self.W_dec
                 self.W_dec.grad -= parallel
+
+    def scale_biases(self, scale: float):
+        """Scale biases and threshold — matches saprmarks reference."""
+        self.b_dec.data *= scale
+        self.b_enc.data *= scale
+        self.threshold.data *= scale
 
 
 def _load_gemma_scope_weights_jumprelu(params_path: str) -> dict:
@@ -372,7 +411,7 @@ def initialize_jumprelu_sae(layer_idx: int = 0, checkpoint_path=None,
     if checkpoint_path is not None and Path(checkpoint_path).exists():
         print(f"[INFO] Loading JumpReLU checkpoint: {checkpoint_path}")
         state = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-        sae.load_state_dict(state)
+        sae.load_state_dict(state, strict=False)
     elif not initialize_random:
         print(f"[INFO] Loading Gemma Scope JumpReLU weights for layer {layer_idx}")
         params_path = _download_gemma_scope_params(layer_idx, cache_dir=cache_dir)
